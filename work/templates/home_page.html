@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colorful To-Do List</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .container:hover {
+            transform: translateY(-5px);
+        }
+        h1 {
+            text-align: center;
+            color: #ff6b6b;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            animation: fadeIn 0.5s ease forwards;
+        }
+        li:hover {
+            transform: translateX(5px);
+            background-color: #f0f0f0;
+        }
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        .completed {
+            text-decoration: line-through;
+            color: #888;
+            opacity: 0.7;
+        }
+        .add-task {
+            display: flex;
+            margin-top: 20px;
+        }
+        .add-task input[type="text"] {
+            flex-grow: 1;
+            padding: 12px;
+            border: 2px solid #4ecdc4;
+            border-radius: 8px 0 0 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        .add-task input[type="text"]:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(78, 205, 196, 0.5);
+        }
+        .add-task button {
+            padding: 12px 20px;
+            background-color: #4ecdc4;
+            color: white;
+            border: none;
+            border-radius: 0 8px 8px 0;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        .add-task button:hover {
+            background-color: #45b7aa;
+            transform: translateX(3px);
+        }
+        #delete_button{
+            background-color: lightpink; 
+            color: white; 
+            border: none; 
+            padding: 5px 10px; 
+            border-radius: 10px;
+
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>To-Do List</h1>
+        <ul id="todo-list">
+            {% for item in all_data %}
+                <li>
+                    <span><input type="checkbox" onchange="toggleCompleted(this)"> {{ item.details }} </span>
+                    <form action="{% url 'delete_task' item.id %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" id='delete_button'>Delete</button>
+                    </form>
+                </li>
+            {% empty %}
+                <li>No data available.</li>
+            {% endfor %}
+        </ul>
+        <form method="post" class="add-task">
+            {% csrf_token %}
+            {{ form.details}} 
+            <button type="submit">Add Task</button>
+        </form>
+    </div>
+
+   
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>to-do list</title>
+    <style>
+
+    </style>
+</head>
+<body>
+        {% for item in all_data %}
+            <li>{{ item.details }}{{item.date}}</li> 
+        {% empty %}
+            <li>No data available.</li>
+        {% endfor %}
+
+    <form method='post'>
+        {% csrf_token %}
+        {{ form }} 
+        <button type="submit">Add Task</button>
+    </form>
+</body>
+</html> {% endcomment %}

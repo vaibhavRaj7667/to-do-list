@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background-color: #FFF8DC;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .card{
+            background-color: white;
+            max-width: 350px;
+            text-align: center;
+            border: 1px solid rgb(202, 132, 180) ;
+            border-radius: 10px;
+            padding: 30px;
+        }
+        .card input[type="text"],
+        .card input[type="password"]{
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #833434;
+            border-radius: 10px;
+        }
+        .card input[type="submit"]{
+
+            width: 100%;
+            padding: 10px;
+            background-color: #ec8ae1;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            margin: 10px 6px;
+            cursor: pointer;
+        }
+        .alert_message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: pink; /* Red background */
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            min-width: 200px;
+            cursor: pointer;
+        }
+        
+
+    </style>
+</head>
+<body>
+    <div class="alert_message">
+        {% if messages %}
+        {% for message in messages %}
+        <span>{{message}}</span>
+        <span class="close-btn" onclick="this.parentElement.style.display='none';">&times;</span>
+        {% endfor %}
+        {% endif %}
+    </div>
+    
+    
+    <div>
+        <form method='post' class='card'>
+            {% csrf_token %}
+            <label for="username" >Username</label>
+            <input type="text" id="username" name="username"> <br>
+            
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password"><br>
+
+            <input type="submit" value="Login"> 
+        </form>
+    </div>
+
+  
+</body>
+</html>
