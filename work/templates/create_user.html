@@ -6,7 +6,8 @@
     <title>Document</title>
 </head>
 <body>
-    <form>
+    <form method='post'>
+        {% csrf_token %}
         <label for="username">Username:</label>
         <input type="text" id="username" name="username">
     
@@ -14,7 +15,10 @@
         <input type="email" id="email" name="email">
     
         <label for="password">Password:</label>
-        <input type="password" id="password" name="password">
+        <input type="password" id="password" name="password1">
+        
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password2">
     
         <button type='submit'>create</button>
     </form>
