@@ -79,7 +79,16 @@
             <input type="password" id="password" name="password"><br>
 
             <input type="submit" value="Login"> 
+
+           
         </form>
+        
+        <form action="{% url 'create_user' %}" method="get">
+            <button type="submit">Create Account</button>
+        </form>
+        
+
+        
     </div>
 
   

@@ -9,7 +9,6 @@ from django.contrib.auth.models import User
 
 
 def logout_view(request):
-    if request.method=="POST":
         logout(request)
         return redirect('home')
 
